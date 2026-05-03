@@ -22,5 +22,173 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto-sans-jp), 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic Medium', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+}
+
+/* スムーズなスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* カスタムセレクションカラー */
+::selection {
+  background-color: #eab308;
+  color: #000000;
+}
+
+/* フォーム要素のカスタマイズ */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* パーティクル効果用のコンテナ */
+.particle-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* スクロールインアニメーション */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(251, 146, 60, 0.6);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ── react-datepicker ダークテーマ上書き ─────────── */
+.salon-calendar {
+  background-color: #111827 !important;
+  border: 1px solid #374151 !important;
+  border-radius: 12px !important;
+  font-family: inherit !important;
+  padding: 8px !important;
+  color: #f9fafb !important;
+}
+
+.salon-calendar .react-datepicker__header {
+  background-color: #111827 !important;
+  border-bottom: 1px solid #374151 !important;
+  border-radius: 10px 10px 0 0 !important;
+  padding-top: 10px !important;
+}
+
+.salon-calendar .react-datepicker__current-month {
+  color: #f9fafb !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+}
+
+.salon-calendar .react-datepicker__day-name {
+  color: #6b7280 !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.salon-calendar .react-datepicker__day {
+  color: #d1d5db !important;
+  border-radius: 6px !important;
+  transition: background 0.15s, color 0.15s !important;
+}
+
+.salon-calendar .react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
+  background-color: #374151 !important;
+  color: #facc15 !important;
+}
+
+.salon-calendar .react-datepicker__day--selected {
+  background-color: #facc15 !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+.salon-calendar .react-datepicker__day--selected:hover {
+  background-color: #fde047 !important;
+  color: #000 !important;
+}
+
+.salon-calendar .react-datepicker__day--disabled {
+  color: #374151 !important;
+  cursor: not-allowed !important;
+}
+
+.salon-calendar .react-datepicker__day--today {
+  border: 1px solid #facc15 !important;
+  color: #facc15 !important;
+  font-weight: 600 !important;
+}
+
+.salon-calendar .react-datepicker__day--today.react-datepicker__day--selected {
+  background-color: #facc15 !important;
+  color: #000 !important;
+  border-color: transparent !important;
+}
+
+.salon-calendar .react-datepicker__navigation-icon::before {
+  border-color: #9ca3af !important;
+}
+
+.salon-calendar .react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: #facc15 !important;
+}
+
+.salon-calendar .react-datepicker__day--keyboard-selected {
+  background-color: #1f2937 !important;
+}
+
+/* 週の外枠を削除 */
+.salon-calendar .react-datepicker__week {
+  display: flex !important;
+  justify-content: center !important;
 }
