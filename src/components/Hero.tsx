@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -38,30 +37,6 @@ export default function Hero() {
     },
   };
 
-  const particleVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: [0, 1, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: 'easeInOut' as const,
-      },
-    },
-  };
-
-  const floatingVariants = {
-    hidden: { y: 20 },
-    visible: {
-      y: [0, -20, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: 'easeInOut' as const,
-      },
-    },
-  };
-
   return (
     <section className="relative w-full h-screen bg-gradient-to-br from-black via-slate-900 to-black overflow-hidden pt-20">
       {/* 背景グラデーション装飾 */}
@@ -76,10 +51,13 @@ export default function Hero() {
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            initial="hidden"
-            animate="visible"
-            variants={particleVariants}
-            transition={{ delay: particle.delay }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: particle.delay,
+            }}
             className="absolute bg-yellow-400 rounded-full"
             style={{
               left: `${particle.x}%`,
@@ -181,7 +159,8 @@ export default function Hero() {
 
         {/* スクロールインジケーター */}
         <motion.div
-          variants={floatingVariants}
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute bottom-10 flex flex-col items-center"
         >
           <span className="text-xs text-gray-500 mb-3">SCROLL</span>
@@ -205,4 +184,3 @@ export default function Hero() {
     </section>
   );
 }
-
