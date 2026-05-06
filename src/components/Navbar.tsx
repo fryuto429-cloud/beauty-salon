@@ -1,10 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const menuItems = [
     { label: 'サービス', href: '#services' },
@@ -47,7 +54,11 @@ export default function Navbar() {
       initial="hidden"
       animate="visible"
       variants={navVariants}
-      className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-yellow-500/10"
+      className={`fixed top-0 w-full z-50 backdrop-blur-md border-b transition-all duration-500 ${
+        scrolled
+          ? 'bg-black/95 border-yellow-500/15 shadow-lg shadow-black/40'
+          : 'bg-transparent border-transparent'
+      }`}
     >
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
         <div className="flex items-center justify-between h-20">

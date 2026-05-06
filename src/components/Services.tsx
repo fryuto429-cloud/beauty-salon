@@ -53,20 +53,21 @@ export default function Services() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' as const } },
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-    hover: { y: -10, boxShadow: '0 20px 40px rgba(251, 146, 60, 0.2)', transition: { duration: 0.3 } },
+    hover: { y: -10, boxShadow: '0 20px 40px rgba(234, 179, 8, 0.15)', transition: { duration: 0.3 } },
   };
 
   return (
-    <section id="services" ref={ref} className="py-24 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-100 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-50 rounded-full blur-3xl"></div>
+    <section id="services" ref={ref} className="py-24 bg-zinc-950 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-500/4 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-transparent"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-8 max-w-6xl relative">
@@ -76,10 +77,10 @@ export default function Services() {
             <span className="text-yellow-600 text-sm font-light tracking-widest">SERVICES</span>
             <motion.div initial={{ scaleX: 0 }} animate={isInView ? { scaleX: 1 } : { scaleX: 0 }} transition={{ duration: 0.6 }} className="w-12 h-px bg-gradient-to-l from-transparent to-yellow-600"></motion.div>
           </motion.div>
-          <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-light text-black mb-6 tracking-wider" style={{ fontFamily: 'var(--font-cormorant)' }}>
+          <motion.h2 variants={itemVariants} className="text-5xl md:text-6xl font-light text-white mb-6 tracking-wider" style={{ fontFamily: 'var(--font-cormorant)' }}>
             上質なサービス
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-gray-600 text-lg font-light max-w-2xl mx-auto">
+          <motion.p variants={itemVariants} className="text-gray-400 text-lg font-light max-w-2xl mx-auto">
             確かな技術と上質な材料で、あなたの美しさを最大限に引き出します
           </motion.p>
         </motion.div>
@@ -88,23 +89,23 @@ export default function Services() {
           {services.map((service) => {
             const IconComponent = iconMap[service.iconKey];
             return (
-              <motion.div key={service.id} variants={cardVariants} whileHover="hover" className="group relative bg-white border border-gray-200 p-8 md:p-10 rounded-lg transition-all duration-300">
-                <motion.div className="absolute inset-0 bg-gradient-to-br from-yellow-50 to-transparent opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300 -z-10"></motion.div>
+              <motion.div key={service.id} variants={cardVariants} whileHover="hover" className="group relative bg-white/5 backdrop-blur-sm border border-white/10 p-8 md:p-10 rounded-lg transition-all duration-300">
+                <motion.div className="absolute inset-0 bg-gradient-to-br from-yellow-500/8 to-transparent opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300 -z-10"></motion.div>
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-lg"></div>
 
                 <motion.div className="w-16 h-16 flex items-center justify-center mb-6 text-yellow-600 transform group-hover:scale-110 transition-transform duration-300" animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity }}>
                   <IconComponent size={64} strokeWidth={1} className="drop-shadow-lg" />
                 </motion.div>
 
-                <motion.h3 className="text-2xl font-light text-black mb-2 tracking-wide" style={{ fontFamily: 'var(--font-cormorant)' }}>
+                <motion.h3 className="text-2xl font-light text-white mb-2 tracking-wide" style={{ fontFamily: 'var(--font-cormorant)' }}>
                   {service.name}
                 </motion.h3>
-                <motion.p className="text-yellow-600 font-light text-lg mb-4">{service.price}</motion.p>
-                <motion.p className="text-gray-600 text-sm leading-relaxed mb-6 font-light">{service.description}</motion.p>
+                <motion.p className="text-yellow-400 font-light text-lg mb-4">{service.price}</motion.p>
+                <motion.p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">{service.description}</motion.p>
 
                 <ul className="space-y-3">
                   {service.features.map((feature, idx) => (
-                    <motion.li key={idx} className="text-sm text-gray-700 flex items-center font-light" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.1 }}>
+                    <motion.li key={idx} className="text-sm text-gray-300 flex items-center font-light" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.1 }}>
                       <motion.span className="w-1.5 h-1.5 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-full mr-3"></motion.span>
                       {feature}
                     </motion.li>
@@ -118,7 +119,7 @@ export default function Services() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : { opacity: 0 }} transition={{ delay: 0.5 }} className="text-center">
-          <p className="text-gray-600 text-sm font-light">
+          <p className="text-gray-500 text-sm font-light">
             すべてのメニューは丁寧なカウンセリングと頭皮・髪質診断が含まれます
           </p>
         </motion.div>

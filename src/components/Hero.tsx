@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -34,31 +33,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  };
-
-  const particleVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: [0, 1, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
-  const floatingVariants = {
-    hidden: { y: 20 },
-    visible: {
-      y: [0, -20, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      },
+      transition: { duration: 0.8, ease: 'easeOut' as const },
     },
   };
 
@@ -76,10 +51,13 @@ export default function Hero() {
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            initial="hidden"
-            animate="visible"
-            variants={particleVariants}
-            transition={{ delay: particle.delay }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: particle.delay,
+            }}
             className="absolute bg-yellow-400 rounded-full"
             style={{
               left: `${particle.x}%`,
@@ -154,9 +132,35 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
+        {/* スタッツ */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-16 flex items-center gap-8 md:gap-16"
+        >
+          {[
+            { num: '98%', label: '顧客満足度' },
+            { num: '3,000+', label: '年間来店数' },
+            { num: '10年', label: 'スタイリスト経験' },
+          ].map(({ num, label }, i) => (
+            <div key={label} className="flex items-center gap-8 md:gap-16">
+              {i > 0 && <div className="w-px h-8 bg-gray-700" />}
+              <div className="text-center">
+                <div
+                  className="text-2xl md:text-3xl font-light text-yellow-400"
+                  style={{ fontFamily: 'var(--font-cormorant)' }}
+                >
+                  {num}
+                </div>
+                <div className="text-xs text-gray-500 mt-1 tracking-wider">{label}</div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
         {/* スクロールインジケーター */}
         <motion.div
-          variants={floatingVariants}
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute bottom-10 flex flex-col items-center"
         >
           <span className="text-xs text-gray-500 mb-3">SCROLL</span>
@@ -180,4 +184,3 @@ export default function Hero() {
     </section>
   );
 }
-
