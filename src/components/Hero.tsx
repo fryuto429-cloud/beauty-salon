@@ -34,7 +34,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.8, ease: 'easeOut' as const },
     },
   };
 
@@ -45,7 +45,7 @@ export default function Hero() {
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: 'easeInOut' as const,
       },
     },
   };
@@ -57,7 +57,7 @@ export default function Hero() {
       transition: {
         duration: 4,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: 'easeInOut' as const,
       },
     },
   };
@@ -152,6 +152,31 @@ export default function Hero() {
             ></motion.span>
             <span className="relative block z-10">ご予約はこちら</span>
           </motion.a>
+        </motion.div>
+
+        {/* スタッツ */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-16 flex items-center gap-8 md:gap-16"
+        >
+          {[
+            { num: '98%', label: '顧客満足度' },
+            { num: '3,000+', label: '年間来店数' },
+            { num: '10年', label: 'スタイリスト経験' },
+          ].map(({ num, label }, i) => (
+            <div key={label} className="flex items-center gap-8 md:gap-16">
+              {i > 0 && <div className="w-px h-8 bg-gray-700" />}
+              <div className="text-center">
+                <div
+                  className="text-2xl md:text-3xl font-light text-yellow-400"
+                  style={{ fontFamily: 'var(--font-cormorant)' }}
+                >
+                  {num}
+                </div>
+                <div className="text-xs text-gray-500 mt-1 tracking-wider">{label}</div>
+              </div>
+            </div>
+          ))}
         </motion.div>
 
         {/* スクロールインジケーター */}
